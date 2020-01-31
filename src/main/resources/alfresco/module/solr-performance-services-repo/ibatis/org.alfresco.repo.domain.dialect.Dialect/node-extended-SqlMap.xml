@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="alfresco.node">
+
+    <select id="select_TxnMinTxIdInNodeIdRange" resultType="java.lang.Long">
+        select
+            commit_time_ms 
+        from 
+            alf_transaction
+        where 
+            id = 
+                (
+			        select 
+			            min(transaction_id) 
+			        from 
+			            alf_node 
+			        where 
+			            id &gt;= #{fromNodeId} 
+			            and id &lt;= #{toNodeId}
+		        )
+    </select>
+    
+    <select id="select_TxnMaxTxIdInNodeIdRange" resultType="java.lang.Long">
+        select
+            commit_time_ms 
+        from 
+            alf_transaction
+        where 
+            id = 
+                (
+			        select 
+			            max(transaction_id) 
+			        from 
+			            alf_node 
+			        where 
+			            id &gt;= #{fromNodeId} 
+			            and id &lt;= #{toNodeId}
+		        )
+    </select>
+    
+    <select id="select_TxnNextTxnCommitTime" resultType="java.lang.Long">
+        select
+            min(commit_time_ms) 
+        from 
+            alf_transaction
+        where 
+            commit_time_ms > #{fromCommitTime} 
+    </select>
+    
+</mapper>
