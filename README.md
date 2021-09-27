@@ -8,7 +8,7 @@ These services are not available by default in:
 * 6.1 - 201901 GA
 * 6.2 - 201911 GA
 
-The improvements provided by these services and Alfresco Search Services 1.5+ are recommended when:
+The improvements provided by these services and Alfresco Search Services 1.4.2+ are recommended when:
 
 * Re-indexing repositories
 * Using DB_ID_RANGE Sharding method
